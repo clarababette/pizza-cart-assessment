@@ -1,15 +1,43 @@
-<h1>Counter Index</h1>
+<div class="index">
+<h1>Perfect Pizza</h1>
 
 
-<div>
-    Start here
-
-    <form action="/count" method="post">
-        <div class="counter" >
-            {{counter}}
-        </div>    
-        <input type="submit" value="Press button to count">
-    
+    <form class="cart" action="/cart" method="post">
+        <h2>Shopping cart</h2>
+        <table>
+            {{!-- {{#each size}}
+            <tr>
+                <td>{{@key}}</td>
+                <td>{{size.quantity}}</td>
+                <td>{{size.cost}}</td>
+            </tr>
+            {{/each}} --}}
+            <tr>
+                <td>Small</td>
+                <td>x2</td>
+                <td>R122.45</td>
+            </tr>
+            <tr>
+                <td>Small</td>
+                <td>x2</td>
+                <td>R122.45</td>
+            </tr>
+            <tr>
+                <td>Small</td>
+                <td>x2</td>
+                <td>R122.45</td>
+            </tr>
+        </table>
+        <h3>Total cost: {{total}}</h3>
+        <input type="submit" value="Checkout">
     </form>
-
+{{#each products}}
+<form class='product' action="/add/{{this.size}}">
+    <img class={{this.size}} src="pizza.svg">
+    <h3>{{this.size}} Pizza</h3>
+    <h3>R{{this.price}}</h3>
+    <p>{{this.description}}</p>
+    <input type="submit" value="Order">
+</form>
+{{/each}}
 </div>

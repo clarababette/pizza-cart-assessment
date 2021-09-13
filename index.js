@@ -1,37 +1,58 @@
 'use strict';
 import express from 'express';
 import exphbs from 'express-handlebars';
+import session from 'express-session';
+import pg from 'pg';
+import pizzaServices from './pizza-services.js';
+import pizzaRoutes from './pizza-routes.js';
+
+const Pool = pg.Pool;
+
+const connectionString = process.env.DATABASE_URL || 'postgresql://localhost:5432/pizza_database';
+
+const pool = (() => {
+  if (process.env.NODE_ENV !== 'production') {
+    return new Pool({
+      connectionString: connectionString,
+      ssl: false,
+    });
+  } else {
+    return new Pool({
+      connectionString: connectionString,
+      ssl: {
+        rejectUnauthorized: false,
+      },
+    });
+  }
+})();
+
+pool.connect();
+const services = pizzaServices(pool);
+const routes = pizzaRoutes(services);
 
 const app = express();
 const PORT =  process.env.PORT || 3017;
 
-// enable the req.body object - to allow us to use HTML forms
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// enable the static folder...
 app.use(express.static('public'));
-
-// add more middleware to allow for templating support
 
 app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
 
-let counter = 0;
+app.use(
+    session({
+      secret: 'Or four and hoard them in my inventory',
+      resave: false,
+      saveUninitialized: true,
+    }),
+);
 
-app.get('/', function(req, res) {
-	res.render('index', {
-		counter
-	});
-});
+app.get('/', routes.indexRoute);
 
-app.post('/count', function(req, res) {
-	counter++;
-	res.redirect('/')
-});
+app.get('/add/:size')
 
-
-// start  the server and start listening for HTTP request on the PORT number specified...
 app.listen(PORT, function() {
 	console.log(`App started on port ${PORT}`)
 });

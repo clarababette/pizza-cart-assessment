@@ -1,21 +1,91 @@
+* {
+	font-family: 'Roboto', sans-serif;
+	margin: 0.25em;
+}
+
 body {
-	background-color: greenyellow;
-	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+	background-color: #233d4d;
+	
 }
 
-.container {
-	margin: auto;
-	background-color: honeydew;
-	width: 80%;
-	padding: 1em;
+.index {
+	margin-left: auto;
+	margin-right: auto;
+	width: 90%;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	column-gap: 25px;
+	row-gap: 25px;
+	grid-template-rows: repeat(4,auto);
+	align-content: center;
+	justify-items: center;
+	margin-top: 25px;
 }
 
+h1 {
+	grid-column: span 3;
+	grid-row: 1;
+	color: #fe7f2d;
+	font-size: 3em;
+}
 
-.counter {
-	background-color: lightgray;
-	font-size: 2em;
-	width: 3em;
+.cart {
+	grid-column: span 3;
+	grid-row: 2;
+	background-color:#a1c181;
+	width: 100%;
 	text-align: center;
-	padding: 0.5em;
-	margin-bottom: 0.25em;
+}
+
+table {
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 1.3em;
+}
+
+tr {
+	height: 2em;
+}
+
+.product {
+	background-color: #619b8a;
+	grid-row: 3;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+h2 {
+	font-size: 2em;
+}
+
+h3 {
+	font-size: 1.8em;
+	text-transform: capitalize;
+}
+
+.large {
+	width: 70%;
+}
+
+.medium {
+	width: 50%;
+}
+
+.small {
+	width: 30%;
+}
+
+input {
+	padding: 0.5em 1em;
+	margin: 1em;
+	font-size: 1.3em;
+	background-color: #fcca46;
+}
+
+p {
+	font-size: 1.3em;
+	margin-left: 1em;
+	margin-right: 1em;
 }
