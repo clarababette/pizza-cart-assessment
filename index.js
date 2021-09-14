@@ -51,7 +51,11 @@ app.use(
 
 app.get('/', routes.indexRoute);
 
-app.get('/add/:size')
+app.post('/add/:size', routes.addToCart);
+app.post('/remove/:size', routes.removeFromCart);
+app.post('/checkout', routes.checkOut)
+app.get('/orders', routes.ordersRoute)
+app.post('/orders/:id/:action', routes.updateStatus);
 
 app.listen(PORT, function() {
 	console.log(`App started on port ${PORT}`)

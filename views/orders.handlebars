@@ -1,0 +1,17 @@
+<div class="orders">
+   <h1>Perfect Pizza</h1>
+<form method="POST">
+  <h4>Order ID</h4>
+  <h4>Cost</h4>
+  <h4>Status</h4>
+  <h4>Action</h4>
+  {{#each order}}
+  <h4 class="id">#{{this.id}}</h4>
+  <h4 class="cost">R{{this.cost}}</h4>
+  <h4 class="status">{{this.status}}</h4>
+  {{#if action}} 
+  <input class="action" type='submit' value={{action}} formaction="/orders/{{this.id}}/{{this.action}}">
+  {{/if}}
+  {{/each}}
+</form>
+</div>
